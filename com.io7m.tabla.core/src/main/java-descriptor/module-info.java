@@ -26,8 +26,6 @@ module com.io7m.tabla.core
   requires com.io7m.jaffirm.core;
   requires com.io7m.seltzer.api;
   requires java.desktop;
-  requires org.apache.commons.text;
-  requires org.chocosolver.solver;
 
   exports com.io7m.tabla.core;
 }
