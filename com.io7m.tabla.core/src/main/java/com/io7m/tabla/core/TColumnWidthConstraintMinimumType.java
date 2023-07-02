@@ -25,14 +25,8 @@ public sealed interface TColumnWidthConstraintMinimumType
   permits TColumnWidthConstraintMinimumAny,
   TColumnWidthConstraintMinimumAtLeast,
   TColumnWidthConstraintMinimumFitContent,
+  TColumnWidthConstraintMinimumFitContentOrHeader,
   TColumnWidthConstraintMinimumFitHeader
 {
-  /**
-   * @return A constraint on the minimum width of a table column.
-   */
 
-  static TColumnWidthConstraintMinimumAny any()
-  {
-    return TColumnWidthConstraintMinimumAny.any();
-  }
 }

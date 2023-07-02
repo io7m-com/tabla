@@ -44,6 +44,10 @@ final class TTableCell
     final int width,
     final String content)
   {
+    if (width == 0) {
+      return new TTableCell(content, List.of(""));
+    }
+
     final var output =
       new ArrayList<String>();
     final var words =

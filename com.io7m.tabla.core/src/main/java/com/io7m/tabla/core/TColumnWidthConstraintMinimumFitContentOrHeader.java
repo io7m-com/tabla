@@ -18,12 +18,22 @@
 package com.io7m.tabla.core;
 
 /**
- * A constraint on the maximum width of a table column.
+ * A constraint that requires that the width of a volume must be at least
+ * large enough to fit the content of the longest value in any row of the
+ * column, or the column header text.
  */
 
-public sealed interface TColumnWidthConstraintMaximumType
-  permits TColumnWidthConstraintMaximumAny,
-  TColumnWidthConstraintMaximumAtMost
+public record TColumnWidthConstraintMinimumFitContentOrHeader()
+  implements TColumnWidthConstraintMinimumType
 {
+  /**
+   * @return A constraint that requires that the width of a volume must be at least
+   * large enough to fit the content of the longest value in any row of the
+   * column, or the column header text.
+   */
 
+  public static TColumnWidthConstraintMinimumFitContentOrHeader fitContentOrHeader()
+  {
+    return new TColumnWidthConstraintMinimumFitContentOrHeader();
+  }
 }

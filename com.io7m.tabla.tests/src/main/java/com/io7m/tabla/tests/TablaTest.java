@@ -24,9 +24,12 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.io7m.tabla.core.TColumnWidthConstraint.any;
 import static com.io7m.tabla.core.TColumnWidthConstraint.atLeastContent;
+import static com.io7m.tabla.core.TColumnWidthConstraint.atLeastContentOrHeader;
 import static com.io7m.tabla.core.TColumnWidthConstraint.atLeastHeader;
 import static com.io7m.tabla.core.TColumnWidthConstraint.exactWidth;
+import static com.io7m.tabla.core.TColumnWidthConstraintMinimumFitContentOrHeader.fitContentOrHeader;
 import static com.io7m.tabla.core.TTableWidthConstraintType.tableWidthAtMost;
 import static com.io7m.tabla.core.TTableWidthConstraintType.tableWidthExact;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -305,6 +308,102 @@ public final class TablaTest
 
     assertEquals("error-too-few-cells", ex.errorCode());
     showException(ex);
+  }
+
+  /**
+   * Tables forced to zero size can still be rendered.
+   */
+
+  @Test
+  public void testZeroRender()
+    throws Exception
+  {
+    final var builder =
+      Tabla.builder()
+        .declareColumn("Name", exactWidth(0))
+        .declareColumn("Description", exactWidth(0));
+
+    builder.addRow()
+      .addCell("Battery")
+      .addCell("A 9v battery.");
+
+    builder.addRow()
+      .addCell("HDMI 3m")
+      .addCell("A 3m HDMI cable.");
+
+    builder.addRow()
+      .addCell("Screen Cleaner")
+      .addCell("A bottle of isopropyl alcohol.");
+
+    final var table = builder.build();
+    showTable(table);
+    assertEquals(0, table.contentWidth());
+    assertEquals(2, table.columnCount());
+    assertEquals(3, table.rowCount());
+  }
+
+  /**
+   * Tables with any constraints can be rendered.
+   */
+
+  @Test
+  public void testAnyRender()
+    throws Exception
+  {
+    final var builder =
+      Tabla.builder()
+        .declareColumn("Name", any())
+        .declareColumn("Description", any());
+
+    builder.addRow()
+      .addCell("Battery")
+      .addCell("A 9v battery.");
+
+    builder.addRow()
+      .addCell("HDMI 3m")
+      .addCell("A 3m HDMI cable.");
+
+    builder.addRow()
+      .addCell("Screen Cleaner")
+      .addCell("A bottle of isopropyl alcohol.");
+
+    final var table = builder.build();
+    showTable(table);
+    assertEquals(0, table.contentWidth());
+    assertEquals(2, table.columnCount());
+    assertEquals(3, table.rowCount());
+  }
+
+  /**
+   * Tables with any constraints can be rendered.
+   */
+
+  @Test
+  public void testFitContentOrHeader()
+    throws Exception
+  {
+    final var builder =
+      Tabla.builder()
+        .declareColumn("Name", atLeastContentOrHeader())
+        .declareColumn("Description", atLeastContentOrHeader());
+
+    builder.addRow()
+      .addCell("Battery")
+      .addCell("A 9v battery.");
+
+    builder.addRow()
+      .addCell("HDMI 3m")
+      .addCell("A 3m HDMI cable.");
+
+    builder.addRow()
+      .addCell("Screen Cleaner")
+      .addCell("A bottle of isopropyl alcohol.");
+
+    final var table = builder.build();
+    showTable(table);
+    assertEquals(44, table.contentWidth());
+    assertEquals(2, table.columnCount());
+    assertEquals(3, table.rowCount());
   }
 
   private static void showException(

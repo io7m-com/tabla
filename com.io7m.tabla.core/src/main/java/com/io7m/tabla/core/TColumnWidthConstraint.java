@@ -71,6 +71,22 @@ public record TColumnWidthConstraint(
   }
 
   /**
+   * Derive a constraint that requires a table column to be at least the
+   * length of the longest value in any row of the column, or the column
+   * header text if that is longer.
+   *
+   * @return A constraint
+   */
+
+  public static TColumnWidthConstraint atLeastContentOrHeader()
+  {
+    return new TColumnWidthConstraint(
+      TColumnWidthConstraintMinimumFitContentOrHeader.fitContentOrHeader(),
+      TColumnWidthConstraintMaximumAny.any()
+    );
+  }
+
+  /**
    * Derive a constraint that requires a table column to be exactly the
    * given width.
    *

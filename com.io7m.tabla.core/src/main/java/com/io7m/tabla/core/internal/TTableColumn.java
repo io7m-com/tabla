@@ -39,6 +39,10 @@ final class TTableColumn
     final String text,
     final int maxLength)
   {
+    if (maxLength == 0) {
+      return "";
+    }
+
     final var builder = new StringBuilder(maxLength);
     builder.append(text);
     if (text.length() > maxLength) {

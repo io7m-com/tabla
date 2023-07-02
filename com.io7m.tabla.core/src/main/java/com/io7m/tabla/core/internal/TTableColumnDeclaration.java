@@ -24,6 +24,7 @@ import com.io7m.tabla.core.TColumnWidthConstraintMaximumType;
 import com.io7m.tabla.core.TColumnWidthConstraintMinimumAny;
 import com.io7m.tabla.core.TColumnWidthConstraintMinimumAtLeast;
 import com.io7m.tabla.core.TColumnWidthConstraintMinimumFitContent;
+import com.io7m.tabla.core.TColumnWidthConstraintMinimumFitContentOrHeader;
 import com.io7m.tabla.core.TColumnWidthConstraintMinimumFitHeader;
 import com.io7m.tabla.core.TColumnWidthConstraintMinimumType;
 import org.chocosolver.solver.Model;
@@ -83,6 +84,9 @@ final class TTableColumnDeclaration
     }
     if (minimum instanceof final TColumnWidthConstraintMinimumFitHeader c) {
       return this.name.length();
+    }
+    if (minimum instanceof final TColumnWidthConstraintMinimumFitContentOrHeader c) {
+      return Math.max(this.name.length(), this.maximumContentLength);
     }
     if (minimum instanceof final TColumnWidthConstraintMinimumAtLeast c) {
       return c.size();
