@@ -17,9 +17,11 @@
 
 package com.io7m.tabla.tests;
 
+import com.io7m.tabla.core.TConstraintHardness;
 import com.io7m.tabla.core.TException;
 import com.io7m.tabla.core.TTableType;
 import com.io7m.tabla.core.Tabla;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +32,8 @@ import static com.io7m.tabla.core.TColumnWidthConstraint.atLeastContentOrHeader;
 import static com.io7m.tabla.core.TColumnWidthConstraint.atLeastHeader;
 import static com.io7m.tabla.core.TColumnWidthConstraint.exactWidth;
 import static com.io7m.tabla.core.TColumnWidthConstraintMinimumFitContentOrHeader.fitContentOrHeader;
+import static com.io7m.tabla.core.TConstraintHardness.HARD_CONSTRAINT;
+import static com.io7m.tabla.core.TConstraintHardness.SOFT_CONSTRAINT;
 import static com.io7m.tabla.core.TTableWidthConstraintType.tableWidthAtMost;
 import static com.io7m.tabla.core.TTableWidthConstraintType.tableWidthExact;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -91,7 +95,7 @@ public final class TablaTest
   {
     final var table =
       Tabla.builder()
-        .setWidthConstraint(tableWidthExact(80))
+        .setWidthConstraint(tableWidthExact(80, HARD_CONSTRAINT))
         .declareColumn("ID")
         .declareColumn("Name")
         .declareColumn("Description")
@@ -114,7 +118,7 @@ public final class TablaTest
   {
     final var table =
       Tabla.builder()
-        .setWidthConstraint(tableWidthAtMost(40))
+        .setWidthConstraint(tableWidthAtMost(40, HARD_CONSTRAINT))
         .declareColumn("ID")
         .declareColumn("Name")
         .declareColumn("Description")
@@ -236,11 +240,10 @@ public final class TablaTest
 
   @Test
   public void testErrorConstraint0()
-    throws Exception
   {
     final var builder =
       Tabla.builder()
-        .setWidthConstraint(tableWidthExact(80))
+        .setWidthConstraint(tableWidthExact(80, HARD_CONSTRAINT))
         .declareColumn("ID", exactWidth(20))
         .declareColumn("Name", exactWidth(20))
         .declareColumn("Description", exactWidth(20));
@@ -250,6 +253,28 @@ public final class TablaTest
 
     assertEquals("error-constraints", ex.errorCode());
     showException(ex);
+  }
+
+  /**
+   * Contradictory constraints cannot be solved.
+   */
+
+  @Test
+  public void testErrorConstraint0Soft()
+    throws TException
+  {
+    final var builder =
+      Tabla.builder()
+        .setWidthConstraint(tableWidthExact(80, SOFT_CONSTRAINT))
+        .declareColumn("ID", exactWidth(20))
+        .declareColumn("Name", exactWidth(20))
+        .declareColumn("Description", exactWidth(20));
+
+    final var table = builder.build();
+    showTable(table);
+    assertEquals(60, table.contentWidth());
+    assertEquals(3, table.columnCount());
+    assertEquals(0, table.rowCount());
   }
 
   /**

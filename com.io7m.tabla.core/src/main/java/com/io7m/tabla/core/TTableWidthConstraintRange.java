@@ -19,17 +19,21 @@ package com.io7m.tabla.core;
 
 import com.io7m.jaffirm.core.Preconditions;
 
+import java.util.Objects;
+
 /**
  * A constraint that says that the width of a table must be within the given
  * inclusive range.
  *
  * @param minimumSize The minimum size
  * @param maximumSize The maximum size
+ * @param hardness    The constraint hardness
  */
 
 public record TTableWidthConstraintRange(
   int minimumSize,
-  int maximumSize)
+  int maximumSize,
+  TConstraintHardness hardness)
   implements TTableWidthConstraintType
 {
   /**
@@ -38,6 +42,7 @@ public record TTableWidthConstraintRange(
    *
    * @param minimumSize The minimum size
    * @param maximumSize The maximum size
+   * @param hardness    The constraint hardness
    */
 
   public TTableWidthConstraintRange
@@ -48,17 +53,21 @@ public record TTableWidthConstraintRange(
       Integer.valueOf(minimumSize),
       Integer.valueOf(maximumSize)
     );
+
+    Objects.requireNonNull(hardness, "hardness");
   }
 
   /**
-   * @param size The width
+   * @param size     The width
+   * @param hardness The constraint hardness
    *
    * @return A constraint that requires a table be exactly the given width
    */
 
   public static TTableWidthConstraintRange exact(
-    final int size)
+    final int size,
+    final TConstraintHardness hardness)
   {
-    return new TTableWidthConstraintRange(size, size);
+    return new TTableWidthConstraintRange(size, size, hardness);
   }
 }
