@@ -117,7 +117,10 @@ public final class TTables
         this.model.arithm(tableColumnSumVar, "=", tableWidthVar);
 
       tableWidthConstraint.setName("TableColumnWidthsSum = TableWidth");
-      tableWidthConstraint.post();
+      switch (this.widthConstraint.hardness()) {
+        case SOFT_CONSTRAINT -> tableWidthConstraint.reify();
+        case HARD_CONSTRAINT -> tableWidthConstraint.post();
+      }
 
       this.solveConstraints();
 

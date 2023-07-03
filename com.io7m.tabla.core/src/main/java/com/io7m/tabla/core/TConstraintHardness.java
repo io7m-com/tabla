@@ -17,30 +17,23 @@
 
 package com.io7m.tabla.core;
 
-import static com.io7m.tabla.core.TConstraintHardness.SOFT_CONSTRAINT;
-
 /**
- * A constraint that says that the width of a table can be anything
+ * The hardness of a constraint.
  */
 
-public record TTableWidthConstraintAny()
-  implements TTableWidthConstraintType
+public enum TConstraintHardness
 {
-  private static final TTableWidthConstraintAny INSTANCE =
-    new TTableWidthConstraintAny();
-
-  @Override
-  public TConstraintHardness hardness()
-  {
-    return SOFT_CONSTRAINT;
-  }
-
   /**
-   * @return A constraint that says that the width of a table can be anything
+   * The solver will attempt to satisfy a soft constraint, but may ignore
+   * the constraint if no solution is available that does satisfy it.
    */
 
-  public static TTableWidthConstraintAny any()
-  {
-    return INSTANCE;
-  }
+  SOFT_CONSTRAINT,
+
+  /**
+   * The solver will fail if no solution is available that satisfies the
+   * constraint.
+   */
+
+  HARD_CONSTRAINT
 }

@@ -26,10 +26,15 @@ import static org.chocosolver.solver.variables.IntVar.MAX_INT_BOUND;
  */
 
 public sealed interface TTableWidthConstraintType
-  permits
-  TTableWidthConstraintAny,
+  permits TTableWidthConstraintAny,
   TTableWidthConstraintRange
 {
+  /**
+   * @return The constraint hardness
+   */
+
+  TConstraintHardness hardness();
+
   /**
    * @return A constraint such that the width can be anything
    */
@@ -40,41 +45,47 @@ public sealed interface TTableWidthConstraintType
   }
 
   /**
-   * @param maximum The maximum width
+   * @param maximum  The maximum width
+   * @param hardness The constraint hardness
    *
    * @return A constraint such that the width can be at most {@code maximum}
    */
 
   static TTableWidthConstraintRange tableWidthAtMost(
-    final int maximum)
+    final int maximum,
+    final TConstraintHardness hardness)
   {
-    return new TTableWidthConstraintRange(0, maximum);
+    return new TTableWidthConstraintRange(0, maximum, hardness);
   }
 
   /**
-   * @param minimum The minimum width
-   * @param maximum The maximum width
+   * @param minimum  The minimum width
+   * @param maximum  The maximum width
+   * @param hardness The constraint hardness
    *
    * @return A constraint such that the width can be in the given range
    */
 
   static TTableWidthConstraintRange withinRange(
     final int minimum,
-    final int maximum)
+    final int maximum,
+    final TConstraintHardness hardness)
   {
-    return new TTableWidthConstraintRange(minimum, maximum);
+    return new TTableWidthConstraintRange(minimum, maximum, hardness);
   }
 
   /**
    * @param minimum The minimum width
    * @param maximum The maximum width
+   *                @param hardness The constraint hardness
    *
    * @return A constraint such that the width can be in the given range
    */
 
   static TTableWidthConstraintRange withinRange(
     final Optional<Integer> minimum,
-    final Optional<Integer> maximum)
+    final Optional<Integer> maximum,
+    final TConstraintHardness hardness)
   {
     final var min =
       minimum.orElse(Integer.valueOf(0));
@@ -82,25 +93,29 @@ public sealed interface TTableWidthConstraintType
     return maximum.map(max -> {
       return withinRange(
         min.intValue(),
-        max.intValue()
+        max.intValue(),
+        hardness
       );
     }).orElseGet(() -> {
       return withinRange(
         min.intValue(),
-        MAX_INT_BOUND
+        MAX_INT_BOUND,
+        hardness
       );
     });
   }
 
   /**
-   * @param size The size
+   * @param size     The size
+   * @param hardness The constraint hardness
    *
    * @return A constraint such that the width must be exactly {@code size}
    */
 
   static TTableWidthConstraintRange tableWidthExact(
-    final int size)
+    final int size,
+    final TConstraintHardness hardness)
   {
-    return TTableWidthConstraintRange.exact(size);
+    return TTableWidthConstraintRange.exact(size, hardness);
   }
 }

@@ -30,6 +30,7 @@ import com.io7m.tabla.core.TColumnWidthConstraint;
 import com.io7m.tabla.core.TColumnWidthConstraintMaximumAny;
 import com.io7m.tabla.core.TColumnWidthConstraintMinimumFitContent;
 import com.io7m.tabla.core.TColumnWidthConstraintMinimumFitHeader;
+import com.io7m.tabla.core.TConstraintHardness;
 import com.io7m.tabla.core.TTableBuilderType;
 import com.io7m.tabla.core.TTableRendererType;
 import com.io7m.tabla.core.TTableType;
@@ -40,6 +41,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
+import static com.io7m.tabla.core.TConstraintHardness.SOFT_CONSTRAINT;
 import static com.io7m.tabla.core.TTableWidthConstraintType.withinRange;
 import static java.lang.Boolean.FALSE;
 import static org.apache.commons.csv.CSVFormat.DEFAULT;
@@ -111,6 +113,15 @@ public final class TCmdPrintCSV implements QCommandType
       Integer.class
     );
 
+  private static final QParameterNamed1<TConstraintHardness> TABLE_WIDTH_HARDNESS =
+    new QParameterNamed1<>(
+      "--table-width-hardness",
+      List.of(),
+      new QConstant("The hardness of the table width constraint."),
+      Optional.of(SOFT_CONSTRAINT),
+      TConstraintHardness.class
+    );
+
   private static final QParameterNamed1<Boolean> COLUMN_FIT_CONTENT =
     new QParameterNamed1<>(
       "--column-fit-content",
@@ -141,11 +152,12 @@ public final class TCmdPrintCSV implements QCommandType
   {
     return QLogback.plusParameters(
       List.of(
+        COLUMN_FIT_CONTENT,
         INPUT,
         RENDERER,
         TABLE_MAX_WIDTH,
         TABLE_MIN_WIDTH,
-        COLUMN_FIT_CONTENT
+        TABLE_WIDTH_HARDNESS
       )
     );
   }
@@ -253,8 +265,10 @@ public final class TCmdPrintCSV implements QCommandType
       context.parameterValue(TABLE_MAX_WIDTH);
     final var minWidth =
       context.parameterValue(TABLE_MIN_WIDTH);
+    final var hardness =
+      context.parameterValue(TABLE_WIDTH_HARDNESS);
 
-    builder.setWidthConstraint(withinRange(minWidth, maxWidth));
+    builder.setWidthConstraint(withinRange(minWidth, maxWidth, hardness));
   }
 
   @Override
