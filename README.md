@@ -25,8 +25,6 @@ tabla
   * ISC license.
   * High-coverage automated test suite.
 
-### Motivation
-
 ### Building
 
 ```
