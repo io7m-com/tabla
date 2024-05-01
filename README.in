@@ -4,7 +4,7 @@
 ### Features
 
   * Uses a generic constraint solver for table layouts.
-  * Written in pure Java 17.
+  * Written in pure Java 21.
   * [OSGi](https://www.osgi.org/) ready.
   * [JPMS](https://en.wikipedia.org/wiki/Java_Platform_Module_System) ready.
   * ISC license.
