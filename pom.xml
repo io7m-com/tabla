@@ -30,7 +30,7 @@
     <com.io7m.quarrel.version>1.6.0</com.io7m.quarrel.version>
     <com.io7m.xstructural.version>1.8.0</com.io7m.xstructural.version>
     <io7m.api.previousVersion>0.0.3-SNAPSHOT</io7m.api.previousVersion>
-    <jqwik.version>1.7.3</jqwik.version>
+    <jqwik.version>1.8.4</jqwik.version>
     <junit.version>5.10.2</junit.version>
   </properties>
 
