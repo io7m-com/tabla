@@ -77,6 +77,9 @@
             <ignoredUnusedDeclaredDependency>
               ch.qos.logback:logback-classic::*
             </ignoredUnusedDeclaredDependency>
+            <ignoredUnusedDeclaredDependency>
+              org.slf4j:slf4j-api::*
+            </ignoredUnusedDeclaredDependency>
           </ignoredUnusedDeclaredDependencies>
         </configuration>
       </plugin>
