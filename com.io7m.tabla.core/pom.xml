@@ -116,6 +116,12 @@ Import-Package: \
               <minimizeJar>true</minimizeJar>
               <relocations>
                 <relocation>
+                  <pattern>org.ehcache</pattern>
+                  <shadedPattern>
+                    com.io7m.tabla.core.internal.shade.ehcache
+                  </shadedPattern>
+                </relocation>
+                <relocation>
                   <pattern>gnu.trove</pattern>
                   <shadedPattern>
                     com.io7m.tabla.core.internal.shade.trove4j
@@ -148,6 +154,12 @@ Import-Package: \
                 </excludes>
               </artifactSet>
               <filters>
+                <filter>
+                  <artifact>org.slf4j:slf4j-api</artifact>
+                  <excludes>
+                    <exclude>**</exclude>
+                  </excludes>
+                </filter>
                 <filter>
                   <artifact>dk.brics.automaton:automaton</artifact>
                   <excludes>
