@@ -28,7 +28,7 @@ module com.io7m.tabla.cmdline
   requires ch.qos.logback.classic;
   requires com.io7m.quarrel.core;
   requires com.io7m.quarrel.ext.logback;
-  requires commons.csv;
+  requires org.apache.commons.csv;
   requires org.slf4j;
 
   exports com.io7m.tabla.cmdline;
