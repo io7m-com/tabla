@@ -9,7 +9,7 @@
   <parent>
     <groupId>com.io7m.tabla</groupId>
     <artifactId>com.io7m.tabla</artifactId>
-    <version>0.0.2</version>
+    <version>1.0.0</version>
   </parent>
 
   <artifactId>com.io7m.tabla.cmdline</artifactId>
@@ -76,6 +76,9 @@
           <ignoredUnusedDeclaredDependencies>
             <ignoredUnusedDeclaredDependency>
               ch.qos.logback:logback-classic::*
+            </ignoredUnusedDeclaredDependency>
+            <ignoredUnusedDeclaredDependency>
+              org.slf4j:slf4j-api::*
             </ignoredUnusedDeclaredDependency>
           </ignoredUnusedDeclaredDependencies>
         </configuration>

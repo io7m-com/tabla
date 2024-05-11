@@ -8,12 +8,12 @@
   <parent>
     <groupId>com.io7m.primogenitor</groupId>
     <artifactId>com.io7m.primogenitor.full</artifactId>
-    <version>8.0.0-beta0001</version>
+    <version>8.2.0</version>
   </parent>
 
   <groupId>com.io7m.tabla</groupId>
   <artifactId>com.io7m.tabla</artifactId>
-  <version>0.0.2</version>
+  <version>1.0.0</version>
 
   <packaging>pom</packaging>
   <name>com.io7m.tabla</name>
@@ -27,11 +27,17 @@
   </modules>
 
   <properties>
-    <com.io7m.quarrel.version>1.2.0</com.io7m.quarrel.version>
+    <!-- Configuration -->
+    <io7m.api.previousVersion>1.0.0</io7m.api.previousVersion>
+    <io7m.java.targetJavaVersion>21</io7m.java.targetJavaVersion>
+
+    <!-- io7m dependencies. -->
+    <com.io7m.quarrel.version>1.6.1</com.io7m.quarrel.version>
     <com.io7m.xstructural.version>1.8.0</com.io7m.xstructural.version>
-    <io7m.api.previousVersion>0.0.2</io7m.api.previousVersion>
-    <jqwik.version>1.7.3</jqwik.version>
-    <junit.version>5.9.3</junit.version>
+
+    <!-- Third-party dependencies. -->
+    <jqwik.version>1.8.4</jqwik.version>
+    <junit.version>5.10.2</junit.version>
   </properties>
 
   <licenses>
@@ -42,9 +48,9 @@
   </licenses>
 
   <scm>
-    <url>https://github.com/io7m/tabla</url>
-    <connection>scm:git:https://github.com/io7m/tabla</connection>
-    <developerConnection>scm:git:https://github.com/io7m/tabla</developerConnection>
+    <url>https://www.github.com/io7m-com/tabla</url>
+    <connection>scm:git:https://www.github.com/io7m-com/tabla</connection>
+    <developerConnection>scm:git:https://www.github.com/io7m-com/tabla</developerConnection>
   </scm>
 
   <developers>
@@ -57,7 +63,7 @@
   </developers>
 
   <issueManagement>
-    <url>https://www.github.com/io7m/tabla/issues</url>
+    <url>https://www.github.com/io7m-com/tabla/issues</url>
     <system>GitHub Issues</system>
   </issueManagement>
 
@@ -79,7 +85,7 @@
 
   <ciManagement>
     <system>GitHub Actions</system>
-    <url>https://github.com/tabla/actions</url>
+    <url>https://www.github.com/io7m-com/tabla/actions</url>
   </ciManagement>
 
   <prerequisites>
@@ -91,39 +97,39 @@
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>2.0.7</version>
+        <version>2.0.13</version>
       </dependency>
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
-        <version>1.4.8</version>
+        <version>1.5.6</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.seltzer</groupId>
         <artifactId>com.io7m.seltzer.api</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-text</artifactId>
-        <version>1.10.0</version>
+        <version>1.12.0</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.jaffirm</groupId>
         <artifactId>com.io7m.jaffirm.core</artifactId>
-        <version>4.0.0</version>
+        <version>4.0.1</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-csv</artifactId>
-        <version>1.9.0</version>
+        <version>1.11.0</version>
       </dependency>
 
       <!-- Build metadata -->
       <dependency>
         <groupId>com.io7m.primogenitor</groupId>
         <artifactId>com.io7m.primogenitor.support</artifactId>
-        <version>8.0.0-beta0001</version>
+        <version>8.2.0</version>
       </dependency>
       <dependency>
         <groupId>org.osgi</groupId>
@@ -150,12 +156,12 @@
       <dependency>
         <groupId>nl.jqno.equalsverifier</groupId>
         <artifactId>equalsverifier</artifactId>
-        <version>3.14.3</version>
+        <version>3.16.1</version>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
-        <version>5.4.0</version>
+        <version>5.11.0</version>
       </dependency>
       <dependency>
         <groupId>net.jqwik</groupId>
@@ -172,7 +178,7 @@
       <dependency>
         <groupId>org.choco-solver</groupId>
         <artifactId>choco-solver</artifactId>
-        <version>4.10.10</version>
+        <version>4.10.14</version>
       </dependency>
 
       <!-- CLI -->

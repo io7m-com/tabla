@@ -9,7 +9,7 @@
   <parent>
     <groupId>com.io7m.tabla</groupId>
     <artifactId>com.io7m.tabla</artifactId>
-    <version>0.0.2</version>
+    <version>1.0.0</version>
   </parent>
 
   <artifactId>com.io7m.tabla.core</artifactId>
@@ -116,6 +116,12 @@ Import-Package: \
               <minimizeJar>true</minimizeJar>
               <relocations>
                 <relocation>
+                  <pattern>org.ehcache</pattern>
+                  <shadedPattern>
+                    com.io7m.tabla.core.internal.shade.ehcache
+                  </shadedPattern>
+                </relocation>
+                <relocation>
                   <pattern>gnu.trove</pattern>
                   <shadedPattern>
                     com.io7m.tabla.core.internal.shade.trove4j
@@ -148,6 +154,12 @@ Import-Package: \
                 </excludes>
               </artifactSet>
               <filters>
+                <filter>
+                  <artifact>org.slf4j:slf4j-api</artifact>
+                  <excludes>
+                    <exclude>**</exclude>
+                  </excludes>
+                </filter>
                 <filter>
                   <artifact>dk.brics.automaton:automaton</artifact>
                   <excludes>
@@ -228,7 +240,7 @@ Import-Package: \
       <plugin>
         <groupId>org.moditect</groupId>
         <artifactId>moditect-maven-plugin</artifactId>
-        <version>1.0.0.RC2</version>
+        <version>1.2.1.Final</version>
         <executions>
           <execution>
             <id>add-module-infos</id>
