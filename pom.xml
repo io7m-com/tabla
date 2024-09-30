@@ -36,7 +36,7 @@
     <com.io7m.xstructural.version>1.8.0</com.io7m.xstructural.version>
 
     <!-- Third-party dependencies. -->
-    <jqwik.version>1.9.0</jqwik.version>
+    <jqwik.version>1.9.1</jqwik.version>
     <junit.version>5.11.1</junit.version>
   </properties>
 
