@@ -18,7 +18,7 @@
  * Plain text table rendering (Core).
  */
 
-module com.io7m.tabla.tests
+open module com.io7m.tabla.tests
 {
   requires static org.osgi.annotation.bundle;
   requires static org.osgi.annotation.versioning;
@@ -30,6 +30,7 @@ module com.io7m.tabla.tests
   requires org.junit.jupiter.engine;
   requires org.junit.platform.commons;
   requires org.junit.platform.engine;
+  requires org.junit.platform.launcher;
 
   requires com.io7m.tabla.cmdline;
   requires com.io7m.tabla.core;
