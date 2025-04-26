@@ -77,6 +77,7 @@ public final class TTableRendererFramed
 
   enum FramePieces
   {
+    // CHECKSTYLE:OFF
     CORNER_BOTTOM_LEFT,
     CORNER_BOTTOM_RIGHT,
     CORNER_TOP_LEFT,
@@ -90,6 +91,7 @@ public final class TTableRendererFramed
     JUNCTION_UP_DOWN_LEFT,
     JUNCTION_LEFT_RIGHT_UP,
     JUNCTION_LEFT_RIGHT_DOWN
+    // CHECKSTYLE:ON
   }
 
   private static Character frameUnicode(
