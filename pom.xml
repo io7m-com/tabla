@@ -37,7 +37,7 @@
 
     <!-- Third-party dependencies. -->
     <jqwik.version>1.9.3</jqwik.version>
-    <org.junit.version>5.14.0</org.junit.version>
+    <org.junit.version>5.14.1</org.junit.version>
   </properties>
 
   <licenses>
